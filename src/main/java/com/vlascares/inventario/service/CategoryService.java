@@ -36,12 +36,12 @@ public class CategoryService {
     }
 
     @Transactional 
-    public CategoryResponse create(Category category) {
-        String name = category.getName().trim();
+    public CategoryResponse create(CategoryRequest request) {
+        String name = request.name().trim();
         if (categoryRepository.existsByNameIgnoreCase(name)) {
             throw new DuplicateResourceException("Ya existe una categoría con el nombre '%s'".formatted(name));
         }
-        return categoryMapper.toResponse(categoryRepository.save(category));
+        return categoryMapper.toResponse(categoryRepository.save(categoryMapper.toEntity(request)));
     }
 
     @Transactional 

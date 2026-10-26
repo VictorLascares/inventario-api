@@ -25,6 +25,8 @@ spring:
 
 server:
   port: ${SERVER_PORT}
+  servlet:
+    context-path: /inventario
   error:
     include-stacktrace: never
 
